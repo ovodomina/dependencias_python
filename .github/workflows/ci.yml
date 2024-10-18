@@ -1,10 +1,7 @@
-name: Python CI/CD
+name: CI
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
@@ -13,31 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout o código
-      - name: Checkout code
+      - name: Check out the repository
         uses: actions/checkout@v2
 
-      # Configura o ambiente Python
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
 
-      # Instala dependências
       - name: Install dependencies
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
 
-      # Executa os testes
-      - name: Run tests
-        run: |
-          source venv/bin/activate
-          pytest
+    
+  docker_build:
+    runs-on: ubuntu-latest
 
-      # Executa a aplicação
-      - name: Run application
-        run: |
-          source venv/bin/activate
-          python app.py
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t calculadora-flask .
