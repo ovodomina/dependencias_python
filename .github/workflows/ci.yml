@@ -1,10 +1,14 @@
-name: CI
+- name: Install dependencies
+  run: |
+    python -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
 
-on:
-  push:
-    branches:
-      - main
+- name: Run tests
+  run: |
+    pytest
 
+<<<<<<< Updated upstream
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,3 +35,8 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t calculadora-flask .
+=======
+- name: Run application
+  run: |
+    python app.py
+>>>>>>> Stashed changes
