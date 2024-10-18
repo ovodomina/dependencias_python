@@ -1,11 +1,13 @@
-# Instala dependências
+# Makefile
+
+# Regra para instalar as dependências
 install:
-	pip install -r requirements.txt
+    pip install -r requirements.txt
 
-# Executa a aplicação
+# Regra para rodar os testes
+test:
+    pytest
+
+# Regra para rodar a aplicação
 run:
-	python app.py
-
-# Limpa arquivos temporários
-clean:
-	rm -rf __pycache__
+    python app.py
